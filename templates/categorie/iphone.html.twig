@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie Iphone | MobilePhone{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center my-4">Iphone</h1>
+
+    {% include "include/flashes.html.twig" %}
+
+    <div class="row">
+        <div class="col-10 mx-auto mb-5">
+
+            {% for article in articles|reverse %}
+                
+                    <div class="col-3">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ asset('uploads/' ~ article.image) }}" class="card-img-top img-custom" height="200" alt="{{ article.titre }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.titre }}</h5>
+                                <p class="card-text">{{ article.description }}</p>
+                                <a href="{{ path('add_item', {'id': article.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+                            </div>
+                        </div>
+                    </div>
+                
+            {% endfor %}
+
+        </div>
+    </div>
+    <h2><a href="{{ path('admin_app_article_new')}}">Créer un nouvel article</a></h2>
+{% endblock %}

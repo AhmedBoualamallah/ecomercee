@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | MobilePhone{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center my-4">Accueil</h1>
+
+    {% include "include/flashes.html.twig" %}
+
+    <div class="row">
+        <div class="col-10 mx-auto mb-5">
+            <div class="row">
+                {% for article in articles | reverse %}
+                    <div class="col-3 mb-4">
+                        <div class="card">
+                            <img src="{{ article.image }}" class="card-img-top" alt="{{ article.titre }}">
+                            <div class="card-body">
+                                <h5 class="card-titre">{{ article.titre }}</h5>
+                                <p class="card-text">{{ article.description|slice(0, 100) ~ '...' }}</p>
+                                <a href="{{ path('app_article_show', {id: article.id}) }}" class="btn btn-primary">Voir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Section "Besoin de conseils ?" -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Besoin de conseils ?</h2>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <a href="{{ path('app_guide_achat') }}">
+                    <img src="{{ asset('images/icon-guide-achat.png') }}" alt="Guide d'achat" class="img-fluid mb-2">
+                    <h3>Guide d'achat</h3>
+                </a>
+                <p>Découvrez notre guide pour choisir le meilleur smartphone.</p>
+            </div>
+
+            <div class="col-md-4">
+                <a href="{{ path('app_comparateur') }}">
+                    <img src="{{ asset('images/icon-comparateur.png') }}" alt="Comparateur" class="img-fluid mb-2">
+                    <h3>Comparateur</h3>
+                </a>
+                <p>Comparez les caractéristiques des smartphones pour faire le bon choix.</p>
+            </div>
+
+            <div class="col-md-4">
+                <a href="{{ path('app_conseils_experts') }}">
+                    <img src="{{ asset('images/icon-conseil-expert.png') }}" alt="Conseils d'experts" class="img-fluid mb-2">
+                    <h3>Conseils d'experts</h3>
+                </a>
+                <p>Bénéficiez de conseils personnalisés de nos experts.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center mt-4">
+        <a href="{{ path('admin_app_article_new') }}" class="btn btn-success">Créer un nouvel article</a>
+    </h2>
+
+{% endblock %}

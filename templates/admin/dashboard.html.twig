@@ -1,0 +1,59 @@
+{# templates/admin/dashboard.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord Admin{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Tableau de bord Admin</h1>
+
+    <div class="container">
+        <div class="row">
+            <!-- Section Utilisateurs -->
+            <div class="col-md-4 mb-4">
+                <h2>Utilisateurs</h2>
+                <ul class="list-group">
+                    {% for user in users %}
+                        <li class="list-group-item">
+                            {{ user.username }} ({{ user.email }})
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">Aucun utilisateur trouvé.</li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ path('app_user_new') }}" class="btn btn-primary mt-2">Ajouter un utilisateur</a>
+            </div>
+
+            <!-- Section Articles -->
+            <div class="col-md-4 mb-4">
+                <h2>Articles</h2>
+                <ul class="list-group">
+                    {% for article in articles %}
+                        <li class="list-group-item">
+                            {{ article.title }}
+                            <a href="{{ path('app_article_edit', {id: article.id}) }}" class="btn btn-warning btn-sm float-end">Éditer</a>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">Aucun article trouvé.</li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ path('admin_app_article_new') }}" class="btn btn-primary mt-2">Ajouter un article</a>
+            </div>
+
+            <!-- Section Contacts -->
+            <div class="col-md-4 mb-4">
+                <h2>Contacts</h2>
+                <ul class="list-group">
+                    {% for contact in contacts %}
+                        <li class="list-group-item">
+                            {{ contact.name }} - {{ contact.email }}
+                            <a href="{{ path('app_contact_show', {id: contact.id}) }}" class="btn btn-info btn-sm float-end">Voir</a>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">Aucun contact trouvé.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
